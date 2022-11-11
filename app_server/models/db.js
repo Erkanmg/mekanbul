@@ -15,7 +15,7 @@ process.on("SIGINT", function() {
 });
 
 mongoose.connection.on("connected",function () {
-    console.log(dbURI + " adresindeki veritabanına bağlanıldı!");    
+    console.log(dbURI + " adresindeki veritabanına bağlanıldı!!");    
 });
 mongoose.connection.on("error",function () {
     console.log(" Bağlantı hatası!");    
