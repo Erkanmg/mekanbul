@@ -3,8 +3,6 @@ var router = express.Router();
 var ctrlMekanlar = require("../controllers/mekanlar");
 var ctrlYorumlar = require("../controllers/yorumlar");
 
-// Tek adresle üç adet veritabanı işlemlerini yapabilirz
-// /api app.js den geliyor
 router
 .route("/mekanlar/:mekanid")
 .get(ctrlMekanlar.mekanGetir)
@@ -26,5 +24,4 @@ router
 .put(ctrlYorumlar.yorumGuncelle)
 .delete(ctrlYorumlar.yorumSil);
 
-//router'ı dış dünyaya açmamızı sağlar
-module.exports=router;
+module.exports = router;

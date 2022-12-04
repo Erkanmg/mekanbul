@@ -1,32 +1,27 @@
-var mongoose=require("mongoose");
-require("./mekansema")//mekansemayi göstermemizi saglar
-//var dbURI = "mongodb://localhost/mekanbul";
-var dbURI = "mongodb+srv://erkanmert123:tuna10@mekanbul.q94nbpv.mongodb.net/mekanbul?retryWrites=true&w=majority"
-//yorum
+var mongoose = require( 'mongoose' );
+var dbURI = "mongodb://localhost/mekanbul"
+require("./mekansema");
+//var dbURI = 'mongodb+srv://omertaskn452:omertaskn452@mekanbul.lsjeuiv.mongodb.net/mekanbul?retryWrites=true&w=majority';
 mongoose.connect(dbURI);
-function kapat(msg,callback){
-    mongoose.connection.close(function(){
+mongoose.connection.on("connected", function (){
+    console.log(dbURI + "adresindeki veritabanına  bağlanıldı!\n");
+});
+mongoose.connection.on("error", function (){
+    console.log("Bağlantı hatası\n");
+});
+mongoose.connection.on("disconnected", function (){
+    console.log("Bağlantı kesildi\n");
+});
+
+function kapat(msg, callback){
+    mongoose.connection.close(function (){
         console.log(msg);
         callback();
-    }
-    );
+    });
 }
-process.on("SIGINT",function(){
-    kapat("Uygulama Kapatıldı",function(){
+
+process.on("SIGNINT", function(){
+    kapat("Uygulama kapatıldı!", function (){
         process.exit(0);
-    }
-    );
-} 
-);//sigint sinyali geldiğinde kapat fonksiyonu ile eşleştirir çağrılır
-mongoose.connection.on("connected",function(){
-    console.log(dbURI+" adresindeki veritabanına bağlandı")
-}
-);//java scriptte metod içinde metod çalıştırılabilir
-mongoose.connection.on("disconnected",function(){
-    console.log(dbURI+" adresindeki veritabanı bağlantısı koptu")
-}
-);
-mongoose.connection.on("error",function(){
-    console.log("Bağlantı hatası");
-}
-);
+    });
+});
