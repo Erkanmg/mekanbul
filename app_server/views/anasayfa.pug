@@ -24,4 +24,10 @@ block content
           p 
             each imkan in mekan.imkanlar 
               span.label.label-warning #{imkan} 
-              | &nbsp;
+              | &nbsp;extends layout
+
+block content
+  #banner.page-header 
+    .row 
+      .col-md-6.col-sm-12 
+        h1= mesaj

@@ -9,7 +9,28 @@ var usersRouter = require('./app_server/routes/users');
 var apiRouter = require('./app_api/routes/index');
 var session = require('express-session');
 
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+require('./app_api/models/db');
+var indexRouter = require('./app_server/routes/index');
+var usersRouter = require('./app_server/routes/users');
+var apiRouter = require('./app_api/routes/index');
+var session = require('express-session');
+
+
 var app = express();
+
+app.use(session({
+  secret: "gizli",
+  cookie:{ maxAge: 1000*60*60*24},
+  resave:true,
+  saveUninitialized:true
+}));
+
+
 
 app.use(session({
   secret: "gizli",

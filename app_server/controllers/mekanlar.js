@@ -87,26 +87,9 @@ const anaSayfa = function (req, res) {
     });
 };
 
-const mekanBilgisi = function (req, res, next) {
-  axios
-    .get(apiSecenekleri.sunucu + apiSecenekleri.apiYolu + req.params.mekanid)
-    .then((response) => {
-      req.session.mekanAdi = response.data.ad;
-      detaySayfasiOlustur(res, response.data);
-    })
-    .catch((hata) => {
-      hataGoster(res, hata);
-    });
-};
 
-const yorumEkle = function(req, res) {
-  var mekanAdi = req.session.mekanAdi;
-  mekanid = req.params.mekanid;
-  if(!mekanAdi)
-  res.redirect("/mekan/"+ mekanid);
-  else res.render("yorumekle",{
-    baslik: mekanAdi + " mekanına yorum ekle"});
-};
+
+
 
 const yorumumuEkle=function(req,res) {
   var gonderilenYorum, mekanid;
